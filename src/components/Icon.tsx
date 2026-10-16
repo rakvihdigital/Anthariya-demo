@@ -37,9 +37,17 @@ export type IconName =
   | "rings"
   | "diya"
   | "moon"
-  | "sun";
+  | "sun"
+  | "card"
+  | "cash"
+  | "upi"
+  | "logout";
 
 const SYMBOLS = `
+<symbol id="i-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h3.5A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5H14"/><path d="M10 16.5 5.5 12 10 7.5M5.5 12H15"/></symbol>
+<symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 9.5h19M6 15h4"/></symbol>
+<symbol id="i-cash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/></symbol>
+<symbol id="i-upi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10 18.5h4M9.5 9.5l2 2 3-3.5"/></symbol>
 <symbol id="i-rings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="14" r="5.5"/><circle cx="15" cy="14" r="5.5"/><circle cx="9" cy="6.6" r="1.4"/></symbol>
 <symbol id="i-diya" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M3.5 13.5c0 3.4 3.8 5.3 8.5 5.3s8.5-1.9 8.5-5.3H3.5Z"/><path d="M12 11c-1.7-1.4-2-3.4 0-6.6 2 3.2 1.7 5.2 0 6.6Z"/><path d="M9 21.2h6"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M19.5 14.6A8 8 0 1 1 9.4 4.5a6.4 6.4 0 0 0 10.1 10.1Z"/></symbol>

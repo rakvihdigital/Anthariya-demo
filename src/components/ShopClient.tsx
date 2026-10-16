@@ -26,7 +26,6 @@ const GROUPS: Group[] = [
   { key: "occ", title: "By Occasion", values: uniq(PRODUCTS.flatMap((p) => p.occasion)), test: (p, v) => (p.occasion as string[]).includes(v) },
   { key: "color", title: "By Colour", values: uniq(PRODUCTS.map((p) => p.color).filter(Boolean)), test: (p, v) => p.color === v },
   { key: "promo", title: "Collections", values: Object.keys(PROMO).filter((t) => PRODUCTS.some((p) => p.tag === t)), label: PROMO, test: (p, v) => p.tag === v },
-  { key: "stock", title: "Availability", values: ["in", "out"], label: { in: "In stock", out: "Out of stock" }, test: (p, v) => (v === "in" ? p.inStock : !p.inStock) },
 ];
 const labelOf = (g: Group, v: string) => g.label?.[v] ?? v;
 const WEAVE = GROUPS[0];
@@ -38,7 +37,7 @@ const PRICE_PRESETS: { label: string; lo: number; hi: number }[] = [
   { label: "₹10,000 – ₹15,000", lo: 10000, hi: 15000 },
   { label: "Above ₹15,000", lo: 15000, hi: MAX_P },
 ].filter((r) => r.hi > r.lo && PRODUCTS.some((p) => p.price >= r.lo && p.price <= r.hi));
-const POP_TITLE: Record<string, string> = { occ: "Occasion", color: "Colour", promo: "Collections", stock: "Availability" };
+const POP_TITLE: Record<string, string> = { occ: "Occasion", color: "Colour", promo: "Collections" };
 
 const SORTERS: Record<string, (a: Product, b: Product) => number> = {
   featured: (a, b) => a.order - b.order,
@@ -239,12 +238,10 @@ export function ShopView({ query }: { query: string }) {
                               const info = g.key === "occ" ? OCCASION_INFO[v as Occasion] : g.key === "promo" ? COLLECTION_INFO[v] : null;
                               return (
                                 <button key={v} {...press} className={`ftile${on ? " is-on" : ""}`}>
-                                  <span className={`ftile__icon${g.key === "stock" ? ` ftile__icon--${v}` : ""}`}>
-                                    {info ? <Icon name={info.icon} /> : <i />}
-                                  </span>
+                                  <span className="ftile__icon">{info && <Icon name={info.icon} />}</span>
                                   <span className="ftile__text">
                                     <strong>{labelOf(g, v)}</strong>
-                                    <small>{info?.note ?? (v === "in" ? "Ready to ship" : "Currently unavailable")}</small>
+                                    {info && <small>{info.note}</small>}
                                   </span>
                                   <em>{n}</em>
                                   {on && <span className="ftile__tick"><Icon name="check" /></span>}
@@ -315,12 +312,12 @@ export function ShopView({ query }: { query: string }) {
 
           {/* Personal styling band */}
           <div className="style-band">
-            <Image src={IMAGES.signature} alt="" sizes="(max-width: 720px) 100vw, 40vw" />
+            <Image src={IMAGES.bannerSignature} alt="" sizes="(max-width: 720px) 100vw, 50vw" />
             <div className="style-band__body">
               <span className="eyebrow eyebrow--gold">Personal Styling</span>
               <p>Can’t decide? <em>Let Nidhi help</em> you find the one.</p>
+              <a href={waHello()} target="_blank" rel="noopener" className="btn btn--gold"><Icon name="whatsapp" /> Chat with us</a>
             </div>
-            <a href={waHello()} target="_blank" rel="noopener" className="btn btn--gold"><Icon name="whatsapp" /> Chat with us</a>
           </div>
         </div>
 

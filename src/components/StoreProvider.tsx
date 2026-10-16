@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import Link from "next/link";
 import { byId } from "@/lib/products";
 
 export type Panel = "menu" | "cart" | "search" | "quickview" | "filters";
@@ -20,6 +21,7 @@ type Store = {
   addToCart: (id: string, qty?: number) => void;
   changeQty: (id: string, delta: number) => void;
   removeFromCart: (id: string) => void;
+  clearCart: () => void;
   toggleWish: (id: string) => void;
   openPanel: (p: Panel) => void;
   closePanels: () => void;
@@ -100,12 +102,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     if (!p || !p.inStock) return;
     setCart((c) => (c.some((l) => l.id === id) ? c.map((l) => (l.id === id ? { ...l, qty: l.qty + qty } : l)) : [...c, { id, qty }]));
     setCartBump((n) => n + 1);
-    toast(<><strong>{p.name}</strong> added to your bag</>);
+    toast(<><strong>{p.name}</strong> added to your bag · <Link href="/cart" className="toast__link">View bag</Link></>);
   }, [toast]);
   const changeQty = useCallback((id: string, delta: number) => {
     setCart((c) => c.map((l) => (l.id === id ? { ...l, qty: l.qty + delta } : l)).filter((l) => l.qty > 0));
   }, []);
   const removeFromCart = useCallback((id: string) => setCart((c) => c.filter((l) => l.id !== id)), []);
+  const clearCart = useCallback(() => setCart([]), []);
 
   const toggleWish = useCallback((id: string) => {
     const p = byId(id);
@@ -131,9 +134,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<Store>(() => ({
     ready, cart, cartCount, cartBump, wish, user, panel, quickId, toastMsg,
-    addToCart, changeQty, removeFromCart, toggleWish, openPanel, closePanels, openQuickView, toast, signIn, signOut,
+    addToCart, changeQty, removeFromCart, clearCart, toggleWish, openPanel, closePanels, openQuickView, toast, signIn, signOut,
   }), [ready, cart, cartCount, cartBump, wish, user, panel, quickId, toastMsg,
-    addToCart, changeQty, removeFromCart, toggleWish, openPanel, closePanels, openQuickView, toast, signIn, signOut]);
+    addToCart, changeQty, removeFromCart, clearCart, toggleWish, openPanel, closePanels, openQuickView, toast, signIn, signOut]);
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
 }

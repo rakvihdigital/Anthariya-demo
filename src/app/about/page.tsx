@@ -5,6 +5,7 @@ import { Icon, type IconName } from "@/components/Icon";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { SectionHead } from "@/components/SectionHead";
+import { CONFIG } from "@/lib/config";
 import { IMAGES } from "@/lib/images";
 
 export const metadata: Metadata = {
@@ -47,6 +48,36 @@ export default function AboutPage() {
               <div><span className="script">Nidhi Gowda</span><small>Founder, Anthariya</small></div>
             </div>
             <Link href="/shop" className="btn btn--plum">Explore the Collection <Icon name="arrow" arrow /></Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* The Art of Draping Traditions */}
+      <section className="section section--cream draping">
+        <div className="container">
+          <SectionHead crest="plum" script="Tradition" eyebrow="We love what we do" title={<>The art of <em>draping traditions</em></>} />
+          <div className="draping__text">
+            <Reveal className="draping__col">
+              <span className="draping__no">i</span>
+              <p>Founded by Nidhi Gowda, Anthariya reflects the timeless elegance of India’s rich textile heritage, thoughtfully reimagined for the contemporary woman. Each collection is a harmonious blend of tradition and modernity, crafted with a deep appreciation for artisanal excellence. Our designs celebrate the strength, grace and individuality of women who carry the essence of heritage into today’s world with confidence and style.</p>
+            </Reveal>
+            <Reveal className="draping__col" delay={0.12}>
+              <span className="draping__no">ii</span>
+              <p>Our sarees are sourced directly from skilled weavers, eliminating middlemen so you receive authentic craftsmanship at the best price. From semi-silk daily elegance to rich pure Kanjeevaram bridal collections, we bring you a wide variety that suits every taste and celebration. We assure you of premium quality and genuine fabrics at a reasonable price, so you can shop with complete confidence and experience beauty.</p>
+            </Reveal>
+          </div>
+          <Reveal className="insta-accounts" variant="stagger">
+            {CONFIG.social.instagramAccounts.map((a) => (
+              <a key={a.handle} href={a.url} target="_blank" rel="noopener" className="insta-account">
+                <span className="insta-account__ring"><span><Icon name="instagram" /></span></span>
+                <span className="insta-account__text">
+                  <strong>{a.name}</strong>
+                  <small>{a.note}</small>
+                  <span className="insta-account__handle">{a.handle}</span>
+                </span>
+                <span className="insta-account__follow" aria-hidden="true"><Icon name="arrow" /></span>
+              </a>
+            ))}
           </Reveal>
         </div>
       </section>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Fragment, useEffect, useRef, useState, type CSSProperties } from "react";
-import { CONFIG, money, waHello, waLink } from "@/lib/config";
+import { CONFIG, money, waHello } from "@/lib/config";
 import { IMAGES } from "@/lib/images";
 import { byId, matches, PRODUCTS, productUrl } from "@/lib/products";
 import { activeKey, NAV } from "./Header";
@@ -14,7 +14,7 @@ import { useStore } from "./StoreProvider";
 
 /* ---------- Mobile menu ---------- */
 function MobileMenu() {
-  const { panel, closePanels, openPanel, user } = useStore();
+  const { panel, closePanels, user } = useStore();
   const open = panel === "menu";
   const active = activeKey(usePathname());
   return (
@@ -34,11 +34,11 @@ function MobileMenu() {
             </Link>
           ))}
         </nav>
-        <div className="menu__quick" style={{ "--i": NAV.length } as CSSProperties}>
-          <button type="button" onClick={() => openPanel("search")}><Icon name="search" /><span>Search</span></button>
-          <Link href="/login" onClick={closePanels}><Icon name="user" /><span>{user ? `Hi, ${user.name.split(" ")[0]}` : "Account"}</span></Link>
-          <Link href="/shop?view=wishlist" onClick={closePanels}><Icon name="heart" /><span>Wishlist</span></Link>
-        </div>
+        <Link href={user ? "/account" : "/login"} className="menu__account" onClick={closePanels} style={{ "--i": NAV.length } as CSSProperties}>
+          <span className="menu__account-icon"><Icon name="user" /></span>
+          <span><strong>{user ? `Hi, ${user.name.split(" ")[0]}` : "My Account"}</strong><small>{user ? "Orders, wishlist & details" : "Login or create an account"}</small></span>
+          <Icon name="arrow" />
+        </Link>
         <Link href="/shop" className="menu__feature" onClick={closePanels} style={{ "--i": NAV.length + 1 } as CSSProperties}>
           <Image src={IMAGES.bannerSignature} alt="" sizes="360px" />
           <span><small>New Season · 2026</small><strong>Shop the <em>Collection</em></strong></span>
@@ -48,63 +48,8 @@ function MobileMenu() {
         <a href={CONFIG.phoneHref} className="menu__call"><Icon name="phone" />{CONFIG.phone}</a>
         <div className="menu__social">
           <a href={CONFIG.social.instagram} aria-label="Instagram" target="_blank" rel="noopener"><Icon name="instagram" /></a>
-          <a href={CONFIG.social.facebook} aria-label="Facebook" target="_blank" rel="noopener"><Icon name="facebook" /></a>
-          <a href={CONFIG.social.youtube} aria-label="YouTube" target="_blank" rel="noopener"><Icon name="youtube" /></a>
           <a href={waHello()} aria-label="WhatsApp" target="_blank" rel="noopener"><Icon name="whatsapp" /></a>
         </div>
-      </div>
-    </aside>
-  );
-}
-
-/* ---------- Shopping bag ---------- */
-function CartDrawer() {
-  const { panel, closePanels, cart, cartCount, changeQty, removeFromCart } = useStore();
-  const open = panel === "cart";
-  const lines = cart.map((l) => ({ ...l, p: byId(l.id)! })).filter((l) => l.p);
-  const subtotal = lines.reduce((s, l) => s + l.p.price * l.qty, 0);
-
-  const checkout = () => {
-    const rows = lines.map((l, n) => `${n + 1}. ${l.p.name} (${l.p.subtitle}) × ${l.qty} = ${money(l.p.price * l.qty)}`);
-    window.open(waLink(`Hello ${CONFIG.brand}! I'd like to order:\n\n${rows.join("\n")}\n\nSubtotal: ${money(subtotal)}`), "_blank", "noopener");
-  };
-
-  return (
-    <aside className={`drawer drawer--right cart${open ? " is-open" : ""}`} aria-label="Shopping bag" aria-hidden={!open} inert={!open}>
-      <div className="drawer__head cart__head">
-        <h2 className="cart__title">Your Bag <span>({cartCount})</span></h2>
-        <button className="icon-btn" type="button" aria-label="Close bag" onClick={closePanels}><Icon name="close" /></button>
-      </div>
-      <div className="cart__body">
-        {lines.length === 0 ? (
-          <div className="cart__empty">
-            <Image src={IMAGES.crestPlum} alt="" sizes="120px" />
-            <h3>Your bag is empty</h3>
-            <p>Every great story begins with a single drape.</p>
-            <Link href="/shop" className="btn btn--plum" onClick={closePanels}>Explore the collection</Link>
-          </div>
-        ) : lines.map(({ id, qty, p }) => (
-          <div className="cart__item" key={id}>
-            <Image src={IMAGES[p.images[0]]} alt={p.name} sizes="90px" />
-            <div>
-              <h4><Link href={productUrl(p)} onClick={closePanels}>{p.name}</Link></h4>
-              <p>{p.subtitle}</p>
-              <div className="cart__price">{money(p.price * qty)}</div>
-              <div className="qty">
-                <button type="button" aria-label="Decrease quantity" onClick={() => changeQty(id, -1)}><Icon name="minus" /></button>
-                <span>{qty}</span>
-                <button type="button" aria-label="Increase quantity" onClick={() => changeQty(id, 1)}><Icon name="plus" /></button>
-              </div>
-            </div>
-            <button type="button" className="cart__remove" aria-label={`Remove ${p.name}`} onClick={() => removeFromCart(id)}><Icon name="trash" /></button>
-          </div>
-        ))}
-      </div>
-      <div className="cart__foot" hidden={lines.length === 0}>
-        <div className="cart__row"><span>Subtotal</span><strong>{money(subtotal)}</strong></div>
-        <p className="cart__note">Shipping &amp; taxes calculated at checkout. Blouse stitching available on request.</p>
-        <button type="button" className="btn btn--plum btn--block" onClick={checkout}><Icon name="whatsapp" /> Place order on WhatsApp</button>
-        <button type="button" className="btn-link" onClick={closePanels}>Continue shopping</button>
       </div>
     </aside>
   );
@@ -196,14 +141,11 @@ function QuickView() {
                 <button type="button" className="btn btn--plum" disabled={!p.inStock} onClick={() => addToCart(p.id, qty)}>{p.inStock ? "Add to bag" : "Sold out"}</button>
               </div>
               <div className="qv__row2">
-                <a className="btn btn--line" target="_blank" rel="noopener"
-                  href={waLink(`Hello! I'm interested in "${p.name} – ${p.subtitle}" (${money(p.price)}). Is it available?`)}>
-                  <Icon name="whatsapp" /> Enquire on WhatsApp
-                </a>
+                <Link href="/cart" className="btn btn--line" onClick={closePanels}><Icon name="bag" /> View bag</Link>
                 <button type="button" className={`qv__wish${on ? " is-on" : ""}`} aria-pressed={on} aria-label="Save to wishlist" onClick={() => toggleWish(p.id)}><Icon name="heart" /></button>
               </div>
               <ul className="qv__perks">
-                <li><Icon name="truck" /> Free shipping across India above ₹2,999</li>
+                <li><Icon name="truck" /> Delivered across India in 5–6 days</li>
                 <li><Icon name="needle" /> Blouse stitching available on request</li>
                 <li><Icon name="shield" /> Easy 7-day exchange on unused sarees</li>
               </ul>
@@ -257,7 +199,6 @@ export function Overlays() {
   return (
     <>
       <MobileMenu />
-      <CartDrawer />
       <SearchOverlay />
       <div className={`scrim${panel && panel !== "search" ? " is-on" : ""}`} onClick={closePanels} />
       <QuickView />

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState, type CSSProperties } from "react";
-import { CONFIG, money, waLink } from "@/lib/config";
+import { CONFIG, money } from "@/lib/config";
 import { IMAGES } from "@/lib/images";
 import { byId, CARE, COLOR_HEX, OCCASION_INFO, offPct, productUrl, WEAVE_IMAGE, WEAVE_NAME, WEAVE_NOTES } from "@/lib/products";
 import { Icon } from "./Icon";
@@ -134,10 +134,7 @@ export function ProductDetail({ id }: { id: string }) {
               <Icon name="heart" />
             </button>
           </div>
-          <a className="btn btn--gold btn--block" target="_blank" rel="noopener"
-            href={waLink(`Hello ${CONFIG.brand}! I'd like to buy "${p.name} – ${p.subtitle}" (${money(p.price)}).\n${url}`)}>
-            <Icon name="whatsapp" /> Buy on WhatsApp
-          </a>
+          <p className="pd-pay"><Icon name="shield" /> Secure checkout · Cash on Delivery, Cards &amp; UPI</p>
           <ul className="pd-perks">
             <li><span><Icon name="truck" /></span><strong><span className="num">5–6</span> day delivery</strong></li>
             <li><span><Icon name="needle" /></span><strong>Blouse stitching</strong></li>
@@ -146,8 +143,6 @@ export function ProductDetail({ id }: { id: string }) {
           <div className="pd-share">
             <span>Share</span>
             <a href={`https://wa.me/?text=${share}`} target="_blank" rel="noopener" aria-label="Share on WhatsApp"><Icon name="whatsapp" /></a>
-            <a href={`https://www.facebook.com/sharer/sharer.php?u=${share}`} target="_blank" rel="noopener" aria-label="Share on Facebook"><Icon name="facebook" /></a>
-            <a href={`https://pinterest.com/pin/create/button/?url=${share}`} target="_blank" rel="noopener" aria-label="Share on Pinterest"><Icon name="pinterest" /></a>
             <button type="button" aria-label="Copy link" onClick={copyLink}><Icon name="link" /></button>
           </div>
         </div>

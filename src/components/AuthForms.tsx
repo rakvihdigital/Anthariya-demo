@@ -57,7 +57,7 @@ function Done({ mode, title, text }: { mode: Mode; title: string; text: string }
         {mode === "login" ? (
           <>
             <Link href="/shop" className="btn btn--plum">Continue Shopping</Link>
-            <Link href="/shop?view=wishlist" className="btn btn--line">My Wishlist</Link>
+            <Link href="/account" className="btn btn--line">My Orders</Link>
           </>
         ) : (
           <>

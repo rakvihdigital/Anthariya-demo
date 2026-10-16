@@ -7,12 +7,12 @@ import type { CSSProperties } from "react";
  */
 
 /** A line mandala drawn in a 200×200 box centred on 0,0. `petals` changes its character. */
-function Mandala({ petals }: { petals: number }) {
+export function Mandala({ petals }: { petals: number }) {
   const ring = (n: number, d: string, key: string) =>
     Array.from({ length: n }, (_, k) => <path key={`${key}${k}`} d={d} transform={`rotate(${(360 / n) * k})`} />);
   const dots = Array.from({ length: petals * 2 }, (_, k) => {
     const a = (k / (petals * 2)) * Math.PI * 2;
-    return <circle key={`d${k}`} cx={Math.sin(a) * 35} cy={-Math.cos(a) * 35} r={1.3} />;
+    return <circle key={`d${k}`} cx={Math.round(Math.sin(a) * 35000) / 1000} cy={Math.round(-Math.cos(a) * 35000) / 1000} r={1.3} />;
   });
   return (
     <svg viewBox="-100 -100 200 200" aria-hidden="true" focusable="false">

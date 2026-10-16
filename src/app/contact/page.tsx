@@ -4,7 +4,9 @@ import { Icon } from "@/components/Icon";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { SectionHead } from "@/components/SectionHead";
+import Image from "next/image";
 import { CONFIG, waHello } from "@/lib/config";
+import { IMAGES } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -22,7 +24,7 @@ const FAQ = [
 export default function ContactPage() {
   return (
     <main id="main">
-      <PageHero crumb="Contact" title={<>Let’s <em>talk</em> sarees</>}
+      <PageHero crumb="Contact Us" title={<>Let’s <em>talk</em> sarees</>}
         lead="Questions about a weave, an order or the perfect blouse? We’re only a message away."
         style={{ paddingBottom: "clamp(60px,6.5vw,92px)" }} />
 
@@ -61,6 +63,29 @@ export default function ContactPage() {
           </Reveal>
           <Reveal className="map" delay={0.12}>
             <iframe title="Anthariya boutique location" src={`https://www.google.com/maps?q=${encodeURIComponent(CONFIG.mapQuery)}&output=embed`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Instagram: one card per account */}
+      <section className="section insta-world on-dark">
+        <div className="container">
+          <SectionHead crest="gold" script="Instagram" gold light eyebrow="Follow our world" title={<>Find us on <em>Instagram</em></>}
+            lead="Three corners of Anthariya, each with its own story. Follow along for new drapes, close-ups and lessons from Nidhi." />
+          <Reveal className="insta-world__grid" variant="stagger">
+            {CONFIG.social.instagramAccounts.map((a) => (
+              <a key={a.handle} href={a.url} target="_blank" rel="noopener" className="ig-card">
+                <span className="ig-card__badge"><span><Icon name="instagram" /></span></span>
+                <strong className="ig-card__name">{a.name}</strong>
+                <span className="ig-card__handle">{a.handle}</span>
+                <span className="ig-card__note">{a.note}</span>
+                <p className="ig-card__about">{a.about}</p>
+                <span className="ig-card__photos" aria-hidden="true">
+                  {a.photos.map((im) => <span key={im}><Image src={IMAGES[im]} alt="" sizes="120px" /></span>)}
+                </span>
+                <span className="ig-card__follow"><Icon name="instagram" /> Follow {a.handle}</span>
+              </a>
+            ))}
           </Reveal>
         </div>
       </section>
