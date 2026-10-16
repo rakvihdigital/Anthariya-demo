@@ -2435,3 +2435,45 @@ dd.co-summary__total { font-size: 24px; color: var(--plum) !important; }
   .btn-link { padding-block: 6px; }
   .acc__profile .acct__avatar { width: 76px; height: 76px; font-size: 30px; }
 }
+
+/* ==========================================================================
+   HERO — fits any screen
+   The slides are stacked in one grid cell, so the banner keeps its full-screen
+   height where there is room and grows to fit the words on short screens
+   (small laptops, landscape phones, zoomed or large-text browsers). The bottom
+   of every slide reserves space for the controls, so text and controls never meet.
+   ========================================================================== */
+.hero {
+  display: grid; height: auto;
+  min-height: clamp(540px, calc(100svh - var(--header-h)), 860px);
+  --ui-space: calc(clamp(36px, 4.5vw, 52px) + 128px); /* controls row incl. the arch previews and their label */
+}
+.hero__slide { position: relative; inset: auto; grid-area: 1 / 1; display: grid; }
+.hero__content {
+  height: auto; min-height: 0;
+  padding-top: clamp(40px, 8svh, 110px); padding-bottom: var(--ui-space);
+}
+.hero__text { padding-bottom: 0; }
+/* the title scales with the screen's height as well as its width */
+.hero__text .display { font-size: clamp(2.2rem, min(5.4vw, 8.2svh), 5.2rem); }
+.hero__text .lead { font-size: clamp(.95rem, min(1.3vw, 2.2svh), 1.125rem); }
+.hero__cta { margin-top: clamp(20px, 3.6svh, 34px); }
+.hero__flourish-line { margin-bottom: clamp(8px, 1.6svh, 14px); }
+
+@media (max-width: 960px) {
+  .hero { min-height: clamp(560px, calc(100svh - var(--header-h)), 820px); --ui-space: 104px; }
+  .hero__content { padding-top: clamp(180px, 34svh, 360px); } /* leaves her face clear above the words */
+  .hero__text .display { font-size: clamp(2rem, min(8.4vw, 7svh), 3.4rem); }
+  .hero__text .lead { font-size: 15px; }
+}
+@media (max-width: 960px) and (orientation: landscape) and (max-height: 500px) {
+  /* phones turned sideways: shorter, with the words beside the photo rather than over the face */
+  .hero { min-height: 420px; }
+  .hero__content { padding-top: 40px; align-items: center; }
+  .hero__text { max-width: 48%; }
+  .hero__text .display { font-size: clamp(1.6rem, 4.2vw, 2.4rem); }
+  .hero__text .lead { font-size: 13.5px; }
+  .hero__media img { object-position: 78% 20%; }
+  /* a deeper shade on the left keeps the words readable beside the photo */
+  .hero__slide::before { background: linear-gradient(90deg, rgba(20, 13, 9, .78) 0%, rgba(20, 13, 9, .55) 40%, rgba(20, 13, 9, 0) 62%); }
+}
