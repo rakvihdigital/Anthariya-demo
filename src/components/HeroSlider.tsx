@@ -26,10 +26,10 @@ const SLIDES: Slide[] = [
     cta: ["/shop?occ=Wedding", "Shop Wedding Sarees"], cta2: ["/shop", "View All"],
   },
   {
-    img: "bannerIvoryRose", thumbPos: "85% 20%", wide: true, pos: "100% 30%", posM: "90% 20%", short: "Signature Silks",
-    alt: "Model in an ivory silk saree with rose-gold zari, its pallu flowing across a warm studio backdrop",
+    img: "bannerSignature", thumbPos: "52% 20%", wide: true, pos: "50% 50%", posM: "63% 20%", short: "Signature Silks",
+    alt: "Model in a black silk saree with a mango-gold pallu in a sunlit courtyard",
     eyebrow: "New Season · 2026", title: <>Woven in heritage, <em>draped</em> in grace</>,
-    lead: "Luminous ivory silk and rose-gold zari, chosen for the moments you will remember forever.",
+    lead: "Black silk, mango-gold accents and a timeless border for every celebration.",
     cta: ["/shop", "Shop the Collection"], cta2: ["/about", "Our Story"],
   },
   {
@@ -40,11 +40,11 @@ const SLIDES: Slide[] = [
     cta: ["/shop?cat=Organza", "Shop Organza"], cta2: ["/shop", "View All"],
   },
   {
-    img: "bannerHeritageSilks", thumbPos: "70% 20%", wide: true, pos: "75% 30%", posM: "75% 20%", short: "Kanjivaram Silks",
-    alt: "Four women wearing ivory, pink, green and burgundy silk sarees together in a heritage courtyard",
-    eyebrow: "Kanjivaram Silks", title: <>Pure zari, <em>timeless</em> silk</>,
-    lead: "From luminous ivory to jewel tones, heirloom drapes made to be cherished.",
-    cta: ["/shop?cat=Silk", "Shop Silk Sarees"], cta2: ["/shop", "View All"],
+    img: "bannerBlackCourtyard", thumbPos: "62% 20%", wide: true, pos: "50% 50%", posM: "80% 20%", short: "The Evening Edit",
+    alt: "Model in a black saree standing in a sunlit heritage courtyard",
+    eyebrow: "The Evening Edit", title: <>Made for <em>after dark</em></>,
+    lead: "A fluid black drape and delicate details, ready for nights worth remembering.",
+    cta: ["/shop?cat=Georgette", "Shop Georgette"], cta2: ["/shop", "View All"],
   },
 ];
 

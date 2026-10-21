@@ -1,5 +1,6 @@
 import type { StaticImageData } from "next/image";
 import ajrakh from "@/assets/img/ajrakh-ivory-cotton.jpg";
+import bannerBlackCourtyard from "@/assets/img/banner-black-courtyard.png";
 import bannerGulaab from "@/assets/img/banner-gulaab-boutique.png";
 import bannerHeritageSilks from "@/assets/img/banner-heritage-silk-collection.png";
 import bannerIvoryRose from "@/assets/img/banner-ivory-rose-silk.png";
@@ -21,6 +22,7 @@ import vanam from "@/assets/img/vanam-green-banarasi.jpg";
 /** Every photo used on the site. Add a new photo: put it in src/assets/img, import it here, give it a key. */
 export const IMAGES = {
   ajrakh,
+  bannerBlackCourtyard,
   bannerGulaab,
   bannerHeritageSilks,
   bannerIvoryRose,
