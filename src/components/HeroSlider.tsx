@@ -19,7 +19,7 @@ type Slide = {
 
 const SLIDES: Slide[] = [
   {
-    img: "mayuri", pos: "50% 22%", posM: "50% 18%", short: "The Wedding Edit",
+    img: "mayuri", pos: "50% 15%", posM: "50% 18%", zoomFrom: "50% 0%", short: "The Wedding Edit",
     alt: "Model in an emerald and rani pink bridal silk saree",
     eyebrow: "The Wedding Edit", title: <>Bridal silks made for <em>forever</em></>,
     lead: "Emerald, rani pink and temple borders, for the bride and the women who stand beside her.",
@@ -33,14 +33,14 @@ const SLIDES: Slide[] = [
     cta: ["/shop?cat=Organza", "Shop Organza"], cta2: ["/shop", "View All"],
   },
   {
-    img: "bannerSignature", thumbPos: "52% 20%", wide: true, pos: "50% 50%", posM: "63% 20%", short: "Signature Silks",
+    img: "bannerSignature", thumbPos: "52% 20%", wide: true, pos: "50% 0%", posM: "63% 20%", zoomFrom: "62% 0%", short: "Signature Silks",
     alt: "Model in a black silk saree with a mango-gold pallu in a sunlit courtyard",
     eyebrow: "New Season · 2026", title: <>Woven in heritage, <em>draped</em> in grace</>,
     lead: "Black silk, mango-gold accents and a timeless border for every celebration.",
     cta: ["/shop", "Shop the Collection"], cta2: ["/about", "Our Story"],
   },
   {
-    img: "bannerBlackCourtyard", thumbPos: "62% 20%", wide: true, pos: "50% 50%", posM: "80% 20%", short: "The Evening Edit",
+    img: "bannerBlackCourtyard", thumbPos: "62% 20%", wide: true, pos: "50% 0%", posM: "80% 20%", zoomFrom: "62% 0%", short: "The Evening Edit",
     alt: "Model in a black saree standing in a sunlit heritage courtyard",
     eyebrow: "The Evening Edit", title: <>Made for <em>after dark</em></>,
     lead: "A fluid black drape and delicate details, ready for nights worth remembering.",
