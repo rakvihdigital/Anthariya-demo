@@ -26,18 +26,18 @@ const SLIDES: Slide[] = [
     cta: ["/shop?occ=Wedding", "Shop Wedding Sarees"], cta2: ["/shop", "View All"],
   },
   {
-    img: "bannerSignature", thumbPos: "52% 20%", wide: true, pos: "50% 50%", posM: "63% 20%", short: "Signature Silks",
-    alt: "Model in a black silk saree with a mango-gold pallu in a sunlit courtyard",
-    eyebrow: "New Season · 2026", title: <>Woven in heritage, <em>draped</em> in grace</>,
-    lead: "Black silk, mango-gold accents and a timeless border for every celebration.",
-    cta: ["/shop", "Shop the Collection"], cta2: ["/about", "Our Story"],
-  },
-  {
     img: "bannerGulaab", thumb: "gulaab", wide: true, pos: "73% 20%", posM: "74% 15%", zoomFrom: "70% 8%", short: "The Organza Edit",
     alt: "Model in an ivory organza saree with painted roses, standing in the Anthariya boutique",
     eyebrow: "The Organza Edit", title: <>Light as air, <em>lovely</em> as a rose</>,
     lead: "Painted roses on ivory organza, finished with a scalloped, bead-edged border.",
     cta: ["/shop?cat=Organza", "Shop Organza"], cta2: ["/shop", "View All"],
+  },
+  {
+    img: "bannerSignature", thumbPos: "52% 20%", wide: true, pos: "50% 50%", posM: "63% 20%", short: "Signature Silks",
+    alt: "Model in a black silk saree with a mango-gold pallu in a sunlit courtyard",
+    eyebrow: "New Season · 2026", title: <>Woven in heritage, <em>draped</em> in grace</>,
+    lead: "Black silk, mango-gold accents and a timeless border for every celebration.",
+    cta: ["/shop", "Shop the Collection"], cta2: ["/about", "Our Story"],
   },
   {
     img: "bannerBlackCourtyard", thumbPos: "62% 20%", wide: true, pos: "50% 50%", posM: "80% 20%", short: "The Evening Edit",
@@ -132,7 +132,7 @@ export function HeroSlider() {
             style={{ "--pos": s.pos, "--pos-m": s.posM, "--zo": s.zoomFrom ?? "50% 50%" } as CSSProperties}>
             {!s.wide && <div className="hero__backdrop" aria-hidden="true"><Image src={IMAGES[s.img]} alt="" sizes="480px" /></div>}
             <div className="hero__media">
-              <Image src={IMAGES[s.img]} alt={s.alt} priority={k === 0} unoptimized={k !== 2} sizes={s.wide ? "3840px" : "1600px"} />
+              <Image src={IMAGES[s.img]} alt={s.alt} priority={k === 0} unoptimized={s.img !== "bannerGulaab"} sizes={s.wide ? "3840px" : "1600px"} />
             </div>
             <div className="hero__content container on-dark">
               <div className="hero__text">
