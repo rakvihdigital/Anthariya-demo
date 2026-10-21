@@ -1,6 +1,8 @@
 import type { StaticImageData } from "next/image";
 import ajrakh from "@/assets/img/ajrakh-ivory-cotton.jpg";
-import bannerGulaab from "@/assets/img/banner-gulaab-ivory-organza.jpg";
+import bannerGulaab from "@/assets/img/banner-gulaab-boutique.png";
+import bannerHeritageSilks from "@/assets/img/banner-heritage-silk-collection.png";
+import bannerIvoryRose from "@/assets/img/banner-ivory-rose-silk.png";
 import bannerRajkumari from "@/assets/img/banner-rajkumari-plum-silk.jpg";
 import bannerSignature from "@/assets/img/banner-signature-black-mango-silk.jpg";
 import crestGold from "@/assets/img/crest-gold.png";
@@ -20,6 +22,8 @@ import vanam from "@/assets/img/vanam-green-banarasi.jpg";
 export const IMAGES = {
   ajrakh,
   bannerGulaab,
+  bannerHeritageSilks,
+  bannerIvoryRose,
   bannerRajkumari,
   bannerSignature,
   crestGold,

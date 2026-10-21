@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/QualityImage";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { IMAGES, type ImageKey } from "@/lib/images";
@@ -8,7 +8,7 @@ import { Icon } from "./Icon";
 
 type Slide = {
   /** `thumb` is the portrait shown in the "Up next" box when the banner photo is a wide landscape. */
-  img: ImageKey; thumb?: ImageKey; pos: string; posM: string;
+  img: ImageKey; thumb?: ImageKey; thumbPos?: string; pos: string; posM: string;
   /** a wide landscape photo that fills the whole banner; other photos sit on the right over a blurred copy of themselves */
   wide?: boolean;
   /** where the slow zoom grows from; "50% 0%" keeps the top of the photo (her head) in frame */
@@ -19,13 +19,6 @@ type Slide = {
 
 const SLIDES: Slide[] = [
   {
-    img: "bannerSignature", thumb: "signature", wide: true, pos: "66% 30%", posM: "66% 30%", short: "Signature Silks",
-    alt: "Model in a black and mango yellow silk saree with red and gold zari border, in a sunlit temple courtyard",
-    eyebrow: "New Season · 2026", title: <>Woven in heritage, <em>draped</em> in grace</>,
-    lead: "Handpicked silks with liquid-gold zari, chosen for the moments you will remember forever.",
-    cta: ["/shop", "Shop the Collection"], cta2: ["/about", "Our Story"],
-  },
-  {
     img: "mayuri", pos: "50% 22%", posM: "50% 18%", short: "The Wedding Edit",
     alt: "Model in an emerald and rani pink bridal silk saree",
     eyebrow: "The Wedding Edit", title: <>Bridal silks made for <em>forever</em></>,
@@ -33,11 +26,11 @@ const SLIDES: Slide[] = [
     cta: ["/shop?occ=Wedding", "Shop Wedding Sarees"], cta2: ["/shop", "View All"],
   },
   {
-    img: "bannerRajkumari", thumb: "rajkumariDetail", wide: true, pos: "36% 30%", posM: "50% 30%", short: "Kanjivaram Silks",
-    alt: "Model in a plum Kanjivaram silk saree with lilac and gold zari border, on a flower-filled terrace at sunset",
-    eyebrow: "Kanjivaram Silks", title: <>Pure zari, <em>timeless</em> silk</>,
-    lead: "Royal plum, lilac borders and gold butta: heirloom drapes made to be cherished.",
-    cta: ["/shop?cat=Silk", "Shop Silk Sarees"], cta2: ["/shop", "View All"],
+    img: "bannerIvoryRose", thumbPos: "85% 20%", wide: true, pos: "100% 30%", posM: "90% 20%", short: "Signature Silks",
+    alt: "Model in an ivory silk saree with rose-gold zari, its pallu flowing across a warm studio backdrop",
+    eyebrow: "New Season · 2026", title: <>Woven in heritage, <em>draped</em> in grace</>,
+    lead: "Luminous ivory silk and rose-gold zari, chosen for the moments you will remember forever.",
+    cta: ["/shop", "Shop the Collection"], cta2: ["/about", "Our Story"],
   },
   {
     img: "bannerGulaab", thumb: "gulaab", wide: true, pos: "73% 20%", posM: "74% 15%", zoomFrom: "70% 8%", short: "The Organza Edit",
@@ -45,6 +38,13 @@ const SLIDES: Slide[] = [
     eyebrow: "The Organza Edit", title: <>Light as air, <em>lovely</em> as a rose</>,
     lead: "Painted roses on ivory organza, finished with a scalloped, bead-edged border.",
     cta: ["/shop?cat=Organza", "Shop Organza"], cta2: ["/shop", "View All"],
+  },
+  {
+    img: "bannerHeritageSilks", thumbPos: "70% 20%", wide: true, pos: "75% 30%", posM: "75% 20%", short: "Kanjivaram Silks",
+    alt: "Four women wearing ivory, pink, green and burgundy silk sarees together in a heritage courtyard",
+    eyebrow: "Kanjivaram Silks", title: <>Pure zari, <em>timeless</em> silk</>,
+    lead: "From luminous ivory to jewel tones, heirloom drapes made to be cherished.",
+    cta: ["/shop?cat=Silk", "Shop Silk Sarees"], cta2: ["/shop", "View All"],
   },
 ];
 
@@ -132,7 +132,7 @@ export function HeroSlider() {
             style={{ "--pos": s.pos, "--pos-m": s.posM, "--zo": s.zoomFrom ?? "50% 50%" } as CSSProperties}>
             {!s.wide && <div className="hero__backdrop" aria-hidden="true"><Image src={IMAGES[s.img]} alt="" sizes="480px" /></div>}
             <div className="hero__media">
-              <Image src={IMAGES[s.img]} alt={s.alt} priority={k === 0} sizes="(max-width: 960px) 100vw, 64vw" quality={85} />
+              <Image src={IMAGES[s.img]} alt={s.alt} priority={k === 0} unoptimized={k !== 2} sizes={s.wide ? "3840px" : "1600px"} />
             </div>
             <div className="hero__content container on-dark">
               <div className="hero__text">
@@ -183,7 +183,7 @@ export function HeroSlider() {
             {SLIDES.map((s, k) => (
               <button key={s.img} type="button" className={`hero__thumb${k === i ? " is-on" : ""}`} aria-label={`Show ${s.short}`} aria-current={k === i}
                 onClick={() => go(k, k > i ? 1 : -1)}>
-                <span className="hero__thumb-img"><Image src={IMAGES[s.thumb ?? s.img]} alt="" sizes="70px" /></span>
+                <span className="hero__thumb-img"><Image src={IMAGES[s.thumb ?? s.img]} alt="" sizes="70px" style={s.thumbPos ? { objectPosition: s.thumbPos } : undefined} /></span>
                 <span className="hero__thumb-label">{s.short}</span>
               </button>
             ))}

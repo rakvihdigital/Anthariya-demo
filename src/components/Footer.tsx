@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/QualityImage";
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { CONFIG } from "@/lib/config";

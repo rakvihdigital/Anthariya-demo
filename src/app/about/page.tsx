@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from "@/components/QualityImage";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/Icon";
 import { PageHero } from "@/components/PageHero";

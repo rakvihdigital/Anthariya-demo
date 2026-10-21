@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/QualityImage";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState, type CSSProperties } from "react";
 import { CONFIG, money } from "@/lib/config";
@@ -69,7 +69,7 @@ export function ProductDetail({ id }: { id: string }) {
               setOrigin(`${((e.clientX - r.left) / r.width) * 100}% ${((e.clientY - r.top) / r.height) * 100}%`);
             }}>
             <Image src={IMAGES[p.images[img]]} alt={`${p.name}, ${p.subtitle}`} priority sizes="(max-width: 960px) 100vw, 600px"
-              quality={85} placeholder="blur" style={{ transformOrigin: origin }} />
+              placeholder="blur" style={{ transformOrigin: origin }} />
             <Badge p={p} />
             <span className="pd-main__hint"><Icon name="search" /> Hover to zoom</span>
           </div>

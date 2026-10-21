@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/QualityImage";
 import Link from "next/link";
 import { useEffect, useState, type CSSProperties } from "react";
 import { money } from "@/lib/config";

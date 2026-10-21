@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/QualityImage";
 import Link from "next/link";
 import { money } from "@/lib/config";
 import { IMAGES } from "@/lib/images";

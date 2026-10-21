@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/QualityImage";
 import type { ReactNode } from "react";
 import { IMAGES } from "@/lib/images";
 import { Reveal } from "./Reveal";

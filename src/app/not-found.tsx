@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/QualityImage";
 import Link from "next/link";
 import { IMAGES } from "@/lib/images";
 

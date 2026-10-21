@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/QualityImage";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { HeroSlider } from "@/components/HeroSlider";

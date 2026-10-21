@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/QualityImage";
 import Link from "next/link";
 import { useEffect, useMemo, useState, type CSSProperties, type FormEvent, type InputHTMLAttributes } from "react";
 import { CONFIG, emailOk, money } from "@/lib/config";

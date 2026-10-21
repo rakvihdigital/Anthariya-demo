@@ -4,7 +4,7 @@ import { Icon } from "@/components/Icon";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { SectionHead } from "@/components/SectionHead";
-import Image from "next/image";
+import Image from "@/components/QualityImage";
 import { CONFIG, waHello } from "@/lib/config";
 import { IMAGES } from "@/lib/images";
 
